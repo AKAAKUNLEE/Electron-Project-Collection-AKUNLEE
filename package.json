@@ -1,0 +1,28 @@
+{
+  "name": "fanqienovel-app",
+  "version": "1.0.0",
+  "description": "作家专区-番茄小说网-番茄小说旗下原创文学平台",
+  "main": "main.js",
+  "author": "AKUNLEE",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder"
+  },
+  "devDependencies": {
+    "electron": "^40.1.0",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.fanqienovel.app",
+    "productName": "番茄小说作家助手",
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": [
+        "portable"
+      ]
+    }
+  }
+}
