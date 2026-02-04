@@ -17,7 +17,7 @@
     "appId": "com.fanqienovel.app",
     "productName": "番茄小说作家助手",
     "directories": {
-      "output": "dist"
+      "output": "dist-new"
     },
     "win": {
       "target": [
