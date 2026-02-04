@@ -1,9 +1,9 @@
 {
-  "name": "fanqienovel-app",
-  "version": "1.0.1",
-  "description": "作家专区-番茄小说网-番茄小说旗下原创文学平台",
+  "name": "electron-template",
+  "version": "1.0.0",
+  "description": "通用 Electron 应用模板",
   "main": "main.js",
-  "author": "AKUNLEE",
+  "author": "Your Name",
   "license": "MIT",
   "scripts": {
     "start": "electron .",
@@ -14,8 +14,8 @@
     "electron-builder": "^24.13.3"
   },
   "build": {
-    "appId": "com.fanqienovel.app",
-    "productName": "番茄小说作家助手",
+    "appId": "com.electron.template",
+    "productName": "Electron Template",
     "directories": {
       "output": "dist"
     },

@@ -5,7 +5,9 @@ contextBridge.exposeInMainWorld('electronAPI', {
   // 示例：发送消息到主进程
   sendMessage: (message) => ipcRenderer.send('message', message),
   // 示例：接收来自主进程的消息
-  onResponse: (callback) => ipcRenderer.on('response', (event, ...args) => callback(...args))
+  onResponse: (callback) => ipcRenderer.on('response', (event, ...args) => callback(...args)),
+  // 示例：获取应用版本
+  getAppVersion: () => ipcRenderer.invoke('get-app-version')
 });
 
 // 页面加载完成后执行
