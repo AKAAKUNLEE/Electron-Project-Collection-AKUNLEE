@@ -5,7 +5,36 @@ const fs = require('fs');
 // 保持对主窗口的全局引用
 let mainWindow;
 
+// 配置会话持久化
+function setupSession() {
+  // 获取默认会话
+  const defaultSession = session.defaultSession;
+  
+  // 配置cookie策略
+  defaultSession.cookies.set({
+    url: 'https://fanqienovel.com',
+    name: 'session_persist',
+    value: 'true',
+    httpOnly: true,
+    secure: true,
+    sameSite: 'strict'
+  }).catch(err => {
+    console.log('设置cookie失败:', err);
+  });
+  
+  // 监听cookie变化
+  defaultSession.cookies.on('changed', (event, cookie, cause, removed) => {
+    console.log('Cookie变化:', cookie.name, 'removed:', removed);
+  });
+  
+  // 验证会话存储路径
+  console.log('会话存储路径:', defaultSession.getPath('sessionData'));
+}
+
 function createWindow() {
+  // 设置会话
+  setupSession();
+  
   // 创建浏览器窗口
   mainWindow = new BrowserWindow({
     width: 1200,
@@ -15,7 +44,11 @@ function createWindow() {
       // 启用会话以保存登录状态
       session: true,
       // 允许跨域请求
-      webSecurity: false
+      webSecurity: false,
+      // 启用远程模块（如果需要）
+      enableRemoteModule: false,
+      // 上下文隔离
+      contextIsolation: true
     }
   });
 
@@ -25,6 +58,12 @@ function createWindow() {
   // 当窗口关闭时触发
   mainWindow.on('closed', function() {
     mainWindow = null;
+  });
+  
+  // 监听页面加载完成
+  mainWindow.webContents.on('did-finish-load', () => {
+    console.log('页面加载完成');
+    // 可以在这里添加一些额外的操作
   });
 }
 
@@ -48,4 +87,5 @@ app.on('activate', function() {
 // 保存会话数据
 app.on('will-quit', function() {
   // 会话数据会自动保存，无需手动处理
+  console.log('应用即将退出，会话数据已保存');
 });
