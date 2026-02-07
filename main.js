@@ -32,17 +32,12 @@ function createWindow() {
       // 允许cookie，确保登录状态持久化
       cookies: true,
       // 允许本地存储
-      localStorage: true,
-      // 启用上下文菜单
-      contextMenu: true
+      localStorage: true
     }
   });
   
   // 确保右键菜单功能正常
-  mainWindow.webContents.on('context-menu', (event, params) => {
-    // 不阻止默认的上下文菜单行为
-    // 这样网站的默认右键菜单会正常显示
-  });
+  // 不添加任何阻止默认行为的代码，让网站的默认右键菜单正常显示
 
   // 加载 doubao.com 网站
   mainWindow.loadURL('https://doubao.com/');

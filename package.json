@@ -1,6 +1,6 @@
 {
   "name": "doubao-desktop",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Doubao.com 桌面应用",
   "main": "main.js",
   "author": "Your Name",
@@ -17,7 +17,7 @@
     "appId": "com.electron.doubao",
     "productName": "Doubao Desktop",
     "directories": {
-      "output": "doubao-desktop-1.0.1"
+      "output": "doubao-desktop-1.0.2"
     },
     "win": {
       "target": [
