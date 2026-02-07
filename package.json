@@ -1,7 +1,7 @@
 {
-  "name": "electron-template",
+  "name": "doubao-desktop",
   "version": "1.0.0",
-  "description": "通用 Electron 应用模板",
+  "description": "Doubao.com 桌面应用",
   "main": "main.js",
   "author": "Your Name",
   "license": "MIT",
@@ -14,10 +14,10 @@
     "electron-builder": "^24.13.3"
   },
   "build": {
-    "appId": "com.electron.template",
-    "productName": "Electron Template",
+    "appId": "com.electron.doubao",
+    "productName": "Doubao Desktop",
     "directories": {
-      "output": "dist"
+      "output": "doubao-desktop-1.0.0"
     },
     "win": {
       "target": [

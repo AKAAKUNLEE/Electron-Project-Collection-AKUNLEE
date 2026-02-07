@@ -1,25 +1,43 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, session } = require('electron');
 const path = require('path');
 
 // 保持对主窗口的全局引用
 let mainWindow;
 
 function createWindow() {
+  // 配置会话，确保登录状态持久化
+  const ses = session.defaultSession;
+  
+  // 允许所有跨域请求，确保 doubao.com 正常运行
+  ses.webRequest.onBeforeSendHeaders((details, callback) => {
+    callback({ cancel: false, requestHeaders: details.requestHeaders });
+  });
+  
   // 创建浏览器窗口
   mainWindow = new BrowserWindow({
     width: 1200,
     height: 800,
+    minWidth: 1000,
+    minHeight: 700,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       // 上下文隔离
       contextIsolation: true,
       // 启用远程模块（如果需要）
-      enableRemoteModule: false
+      enableRemoteModule: false,
+      // 启用web安全
+      webSecurity: true,
+      // 允许执行脚本
+      javascript: true,
+      // 允许cookie，确保登录状态持久化
+      cookies: true,
+      // 允许本地存储
+      localStorage: true
     }
   });
 
-  // 加载本地的 index.html 文件
-  mainWindow.loadFile('index.html');
+  // 加载 doubao.com 网站
+  mainWindow.loadURL('https://doubao.com/');
 
   // 当窗口关闭时触发
   mainWindow.on('closed', function() {
@@ -30,6 +48,11 @@ function createWindow() {
   mainWindow.webContents.on('did-finish-load', () => {
     console.log('页面加载完成');
     // 可以在这里添加一些额外的操作
+  });
+  
+  // 监听页面导航完成
+  mainWindow.webContents.on('did-navigate', (event, url) => {
+    console.log('导航到:', url);
   });
 }
 
